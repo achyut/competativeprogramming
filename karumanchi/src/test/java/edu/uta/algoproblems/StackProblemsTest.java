@@ -1,5 +1,6 @@
 package edu.uta.algoproblems;
 
+import edu.uta.algoproblems.stack.ApStackProblems;
 import edu.uta.algoproblems.stack.BalancingOfSymbols;
 import edu.uta.algoproblems.stack.InfixToPrefixAndPostFix;
 import junit.framework.TestCase;
@@ -41,17 +42,17 @@ public class StackProblemsTest extends TestCase{
 		*/
 	}
 	
-	public void testEvaluationOfPostfix(){
+	public void testEvaluationOfPostfix() throws Exception{
 		//eg.["2", "1", "+", "3", "*"] -> ((2 + 1) * 3) -> 9
 		 // ["4", "13", "5", "/", "+"] -> (4 + (13 / 5)) -> 6
-		InfixToPrefixAndPostFix inf = new InfixToPrefixAndPostFix();
-		String exp = "(1+2)*7-2";
-		exp = inf.convertInfixToPostFix(exp);
-		
-		//assertEquals("12+7*2-",19);
+		String[] exp = {"2","1","+", "3","*"};
+		ApStackProblems sp = new ApStackProblems();
+		assertEquals("9",sp.evaluatePostfixExpression(exp));
+		String[] exp2 = {"4","13","5","/","+"};
+		assertEquals("6",sp.evaluatePostfixExpression(exp2));
 	}
 	
-	public void testEvalutaionOfStackInOnePass(){
+	public void testEvalutaionOfInfixExpressionInOnePass(){
 		
 	}
 	
@@ -123,7 +124,6 @@ public class StackProblemsTest extends TestCase{
 		//For example,
 		//path = "/home/", => "/home"
 		//path = "/a/./b/../../c/", => "/c"
-		// cornor cases:
 		//Corner Cases:
 		//Did you consider the case where path = "/../"?
 		//In this case, you should return "/".
