@@ -71,7 +71,7 @@ public class SinglyLinklistProblemTest extends TestCase{
 		assertFalse(sls.ifLoopExists(sl));
 	}
 	
-	public void testFindBeginOfLoop(){
+	public void testFindBeginOfLoop() throws Exception{
 		SinglyLinklistProblems<String> sls = new SinglyLinklistProblems<String>();
 		SinglyList<String> sl = new SinglyList<String>();
 		SinglyNode<String> node8 = new SinglyNode<String>("node8");
@@ -104,4 +104,41 @@ public class SinglyLinklistProblemTest extends TestCase{
 		assertTrue(sls.ifLoopExists(sl));
 		assertEquals("node3",(String)sls.findBeginOfLoop(sl).value);
 	}
+	
+	public void testRemoveOfLoopInList() throws Exception{
+		SinglyLinklistProblems<String> sls = new SinglyLinklistProblems<String>();
+		SinglyList<String> sl = new SinglyList<String>();
+		SinglyNode<String> node8 = new SinglyNode<String>("node8");
+		node8.next = null;
+		SinglyNode<String> node7 = new SinglyNode<String>("node7");
+		node7.next = node8;
+		SinglyNode<String> node6 = new SinglyNode<String>("node6");
+		node6.next = node7;
+		SinglyNode<String> node5 = new SinglyNode<String>("node5");
+		node5.next = node6;
+		SinglyNode<String> node4 = new SinglyNode<String>("node4");
+		node4.next = node5;
+		SinglyNode<String> node3 = new SinglyNode<String>("node3");
+		node3.next = node4;
+		SinglyNode<String> node2 = new SinglyNode<String>("node2");
+		node2.next = node3;
+		SinglyNode<String> node1 = new SinglyNode<String>("node1");
+		node1.next = node2;
+		
+		sl.addInTail(node1);
+		sl.addInTail(node2);
+		sl.addInTail(node3);
+		sl.addInTail(node4);
+		sl.addInTail(node5);
+		sl.addInTail(node6);
+		sl.addInTail(node7);
+		sl.addInTail(node8);
+		
+		node8.next=node3;
+		assertTrue(sls.ifLoopExists(sl));
+		assertEquals("node3",(String)sls.findBeginOfLoop(sl).value);
+		sls.removeLoopFromList(sl);
+		assertFalse(sls.ifLoopExists(sl));
+	}
+	
 }
