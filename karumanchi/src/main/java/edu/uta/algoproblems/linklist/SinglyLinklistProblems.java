@@ -3,7 +3,7 @@ package edu.uta.algoproblems.linklist;
 import com.sui.datastructures.SinglyList;
 import com.sui.datastructures.nodes.SinglyNode;
 
-public class SinglyLinklistProblems<Itemtype> {
+public class SinglyLinklistProblems<Itemtype extends Comparable<Itemtype>> {
 
 	/**
 	 * @author achyut
@@ -166,6 +166,113 @@ public class SinglyLinklistProblems<Itemtype> {
 		curr3.next = null;
 	}
 	
+	/**
+	 * Method to determine if the singly list is sorted
+	 * @author achyut
+	 * @param sl
+	 * @return
+	 */
+	public boolean isSorted(SinglyList<Itemtype> sl) {
+		SinglyNode<Itemtype> curr = sl.getHead();
+		Itemtype prev = curr.value;
+		while(curr!=null){
+			curr = curr.next;
+			if(curr!=null){
+				if(curr.value.compareTo(prev)<0){
+					return false;
+				}
+				prev = curr.value;	
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * Method to determine if the singly list is reverse sorted
+	 * @author achyut
+	 * @param sl
+	 * @return
+	 */
+	public boolean isReverseSorted(SinglyList<Itemtype> sl) {
+		boolean result = false;
+		SinglyNode<Itemtype> curr = sl.getHead();
+		Itemtype prev = curr.value;
+		while(curr!=null){
+			curr = curr.next;
+			if(curr!=null){
+				//System.out.println(curr.value+"|"+curr.value.compareTo(prev)+"|"+prev);
+				if(curr.value.compareTo(prev)<0){
+					result = true;
+				}
+				else{
+					return false;
+				}
+				prev = curr.value;	
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * Method to sort a link list
+	 * @param sl
+	 * @throws Exception
+	 */
+	public void sortLinkList(SinglyList<Itemtype> sl) throws Exception {
+		if(sl.getHead()==null){
+			throw new Exception("Empty list");
+		}
+		SinglyNode<Itemtype> curr1 = sl.getHead();
+		SinglyNode<Itemtype> curr2 = sl.getHead();
+		for(int i=1;i<=sl.getLength();i++){
+			for(int j=i;j<=sl.getLength();j++){
+				curr2 = curr1.next;
+				if(curr2!=null && curr2.value.compareTo(curr1.value)<0){
+					Itemtype temp = curr1.value;
+					curr1.value = curr2.value;
+					curr2.value = temp;
+				}
+			}
+			curr1 = curr1.next;
+		}
+	}
+
+	/**
+	 * Method to reverse a link list
+	 * @param sl
+	 */
+	public void reverseList(SinglyList<Itemtype> sl) {
+		SinglyNode<Itemtype> prev = sl.getHead();
+		SinglyNode<Itemtype> curr1 = sl.getHead().next;
+		SinglyNode<Itemtype> curr2 = sl.getHead().next.next;
+		sl.setTail(sl.getHead());
+		prev.next = null;
+		while(curr2.next!=null){
+			curr1.next = prev;
+			prev = curr1;
+			curr1 = curr2;
+			curr2 = curr2.next;	
+		}
+		curr2.next = curr1;
+		curr1.next = prev;
+		sl.setHead(curr2);
+	}
+
+	/**
+	 * Method to insert an item in a sorted list
+	 * @param sl
+	 * @param i
+	 */
+	public void insertInSortedList(SinglyList<Itemtype> sl,Itemtype i) {
+		SinglyNode<Itemtype> curr = sl.getHead();
+		while(curr.next!=null && curr.next.value.compareTo(i)<0){
+			curr = curr.next;
+		}
+		SinglyNode<Itemtype> newnode = new SinglyNode<Itemtype>(i);
+		newnode.next=curr.next;
+		curr.next = newnode;
+		sl.increaseLength(1);
+	}
 	
 
 }

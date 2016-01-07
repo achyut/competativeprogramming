@@ -40,21 +40,13 @@ public class SinglyLinklistProblemTest extends TestCase{
 		SinglyLinklistProblems<String> sls = new SinglyLinklistProblems<String>();
 		SinglyList<String> sl = new SinglyList<String>();
 		SinglyNode<String> node8 = new SinglyNode<String>("node8");
-		node8.next = null;
 		SinglyNode<String> node7 = new SinglyNode<String>("node7");
-		node7.next = node8;
 		SinglyNode<String> node6 = new SinglyNode<String>("node6");
-		node6.next = node7;
 		SinglyNode<String> node5 = new SinglyNode<String>("node5");
-		node5.next = node6;
 		SinglyNode<String> node4 = new SinglyNode<String>("node4");
-		node4.next = node5;
 		SinglyNode<String> node3 = new SinglyNode<String>("node3");
-		node3.next = node4;
 		SinglyNode<String> node2 = new SinglyNode<String>("node2");
-		node2.next = node3;
 		SinglyNode<String> node1 = new SinglyNode<String>("node1");
-		node1.next = node2;
 		
 		sl.addInTail(node1);
 		sl.addInTail(node2);
@@ -75,21 +67,13 @@ public class SinglyLinklistProblemTest extends TestCase{
 		SinglyLinklistProblems<String> sls = new SinglyLinklistProblems<String>();
 		SinglyList<String> sl = new SinglyList<String>();
 		SinglyNode<String> node8 = new SinglyNode<String>("node8");
-		node8.next = null;
 		SinglyNode<String> node7 = new SinglyNode<String>("node7");
-		node7.next = node8;
 		SinglyNode<String> node6 = new SinglyNode<String>("node6");
-		node6.next = node7;
 		SinglyNode<String> node5 = new SinglyNode<String>("node5");
-		node5.next = node6;
 		SinglyNode<String> node4 = new SinglyNode<String>("node4");
-		node4.next = node5;
 		SinglyNode<String> node3 = new SinglyNode<String>("node3");
-		node3.next = node4;
 		SinglyNode<String> node2 = new SinglyNode<String>("node2");
-		node2.next = node3;
 		SinglyNode<String> node1 = new SinglyNode<String>("node1");
-		node1.next = node2;
 		
 		sl.addInTail(node1);
 		sl.addInTail(node2);
@@ -109,21 +93,68 @@ public class SinglyLinklistProblemTest extends TestCase{
 		SinglyLinklistProblems<String> sls = new SinglyLinklistProblems<String>();
 		SinglyList<String> sl = new SinglyList<String>();
 		SinglyNode<String> node8 = new SinglyNode<String>("node8");
-		node8.next = null;
 		SinglyNode<String> node7 = new SinglyNode<String>("node7");
-		node7.next = node8;
 		SinglyNode<String> node6 = new SinglyNode<String>("node6");
-		node6.next = node7;
 		SinglyNode<String> node5 = new SinglyNode<String>("node5");
-		node5.next = node6;
 		SinglyNode<String> node4 = new SinglyNode<String>("node4");
-		node4.next = node5;
 		SinglyNode<String> node3 = new SinglyNode<String>("node3");
-		node3.next = node4;
 		SinglyNode<String> node2 = new SinglyNode<String>("node2");
-		node2.next = node3;
 		SinglyNode<String> node1 = new SinglyNode<String>("node1");
-		node1.next = node2;
+		
+		sl.addInTail(node1);
+		sl.addInTail(node2);
+		sl.addInTail(node3);
+		sl.addInTail(node4);
+		sl.addInTail(node5);
+		sl.addInTail(node6);
+		sl.addInTail(node7);
+		sl.addInTail(node8);
+		node8.next=node3;
+		assertTrue(sls.ifLoopExists(sl));
+		assertEquals("node3",(String)sls.findBeginOfLoop(sl).value);
+		sls.removeLoopFromList(sl);
+		assertFalse(sls.ifLoopExists(sl));
+	}
+	
+	public void testSortingOfList() throws Exception{
+		SinglyLinklistProblems<Integer> sls = new SinglyLinklistProblems<Integer>();
+		SinglyList<Integer> sl = new SinglyList<Integer>();
+		SinglyNode<Integer> node8 = new SinglyNode<Integer>(8);
+		SinglyNode<Integer> node7 = new SinglyNode<Integer>(7);
+		SinglyNode<Integer> node6 = new SinglyNode<Integer>(6);
+		SinglyNode<Integer> node5 = new SinglyNode<Integer>(5);
+		SinglyNode<Integer> node4 = new SinglyNode<Integer>(4);
+		SinglyNode<Integer> node3 = new SinglyNode<Integer>(3);
+		SinglyNode<Integer> node2 = new SinglyNode<Integer>(2);
+		SinglyNode<Integer> node1 = new SinglyNode<Integer>(1);
+		
+		sl.addInTail(node1);
+		sl.addInTail(node2);
+		sl.addInTail(node3);
+		sl.addInTail(node4);
+		sl.addInTail(node5);
+		sl.addInTail(node6);
+		sl.addInTail(node7);
+		sl.addInTail(node8);
+		assertTrue(sls.isSorted(sl));
+		node2.value = 4;
+		assertFalse(sls.isSorted(sl));
+		sls.sortLinkList(sl);
+		assertTrue(sls.isSorted(sl));		
+	}
+
+	
+	public void testInsertInSortedList() throws Exception{
+		SinglyLinklistProblems<Integer> sls = new SinglyLinklistProblems<Integer>();
+		SinglyList<Integer> sl = new SinglyList<Integer>();
+		SinglyNode<Integer> node8 = new SinglyNode<Integer>(8);
+		SinglyNode<Integer> node7 = new SinglyNode<Integer>(7);
+		SinglyNode<Integer> node6 = new SinglyNode<Integer>(6);
+		SinglyNode<Integer> node5 = new SinglyNode<Integer>(5);
+		SinglyNode<Integer> node4 = new SinglyNode<Integer>(4);
+		SinglyNode<Integer> node3 = new SinglyNode<Integer>(3);
+		SinglyNode<Integer> node2 = new SinglyNode<Integer>(2);
+		SinglyNode<Integer> node1 = new SinglyNode<Integer>(1);
 		
 		sl.addInTail(node1);
 		sl.addInTail(node2);
@@ -134,11 +165,38 @@ public class SinglyLinklistProblemTest extends TestCase{
 		sl.addInTail(node7);
 		sl.addInTail(node8);
 		
-		node8.next=node3;
-		assertTrue(sls.ifLoopExists(sl));
-		assertEquals("node3",(String)sls.findBeginOfLoop(sl).value);
-		sls.removeLoopFromList(sl);
-		assertFalse(sls.ifLoopExists(sl));
+		assertTrue(sls.isSorted(sl));
+		sls.insertInSortedList(sl,1);
+		sls.insertInSortedList(sl,5);
+		sls.insertInSortedList(sl,7);
+		assertTrue(sls.isSorted(sl));		
 	}
 	
+	public void testReversingOfList() throws Exception{
+		SinglyLinklistProblems<Integer> sls = new SinglyLinklistProblems<Integer>();
+		SinglyList<Integer> sl = new SinglyList<Integer>();
+		SinglyNode<Integer> node8 = new SinglyNode<Integer>(1);
+		SinglyNode<Integer> node7 = new SinglyNode<Integer>(2);
+		SinglyNode<Integer> node6 = new SinglyNode<Integer>(3);
+		SinglyNode<Integer> node5 = new SinglyNode<Integer>(4);
+		SinglyNode<Integer> node4 = new SinglyNode<Integer>(5);
+		SinglyNode<Integer> node3 = new SinglyNode<Integer>(6);
+		SinglyNode<Integer> node2 = new SinglyNode<Integer>(7);
+		SinglyNode<Integer> node1 = new SinglyNode<Integer>(8);
+		
+		sl.addInTail(node1);
+		sl.addInTail(node2);
+		sl.addInTail(node3);
+		sl.addInTail(node4);
+		sl.addInTail(node5);
+		sl.addInTail(node6);
+		sl.addInTail(node7);
+		sl.addInTail(node8);
+		assertTrue(sls.isReverseSorted(sl));
+		node2.value = 1;
+		assertFalse(sls.isReverseSorted(sl));
+		node2.value = 7;
+		sls.reverseList(sl);
+		assertTrue(sls.isSorted(sl));		
+	}
 }
