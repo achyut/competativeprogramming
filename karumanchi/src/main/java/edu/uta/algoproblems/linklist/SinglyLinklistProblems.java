@@ -62,4 +62,32 @@ public class SinglyLinklistProblems<Itemtype> {
 		}
 	}
 
+	public boolean ifLoopExists(SinglyList<Itemtype> sl) {
+		SinglyNode<Itemtype> curr1 = sl.getHead();
+		SinglyNode<Itemtype> curr2 = sl.getHead().next;
+		while(true){
+			if(curr2==null){
+				return false;
+			}
+			if(curr1==curr2){
+				return true;
+			}
+			curr1=curr1.next;
+			if(curr2.next!=null){
+				curr2=curr2.next.next;	
+			}
+			else{
+				curr2 = curr2.next;
+			}
+		}
+		
+	}
+
+	public SinglyNode<Itemtype> findBeginOfLoop(SinglyList<String> sl) {
+		
+		return null;
+	}
+	
+	
+
 }
