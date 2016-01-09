@@ -361,4 +361,40 @@ public class SinglyLinklistProblems<Itemtype extends Comparable<Itemtype>> {
 		sl.decreaseLength(1);
 	}
 
+	public SinglyNode<Itemtype> findInterSectionNode(SinglyList<Itemtype> sl, SinglyList<Itemtype> sl1) throws Exception{
+		SinglyNode<Itemtype> curr1 = sl.getHead();
+		SinglyNode<Itemtype> curr2 = sl1.getHead();
+		int len1 = sl.getLength();
+		int len2 = sl1.getLength();
+		int count = 1;
+		if(len1<len2){
+			while(count<=len1){
+				curr1 = curr1.next;
+				curr2 = curr2.next;
+				count++;
+			}
+			while(curr2!=null){
+				if(curr2==curr1){
+					return curr1;
+				}
+				curr2 = curr2.next;
+			}
+			throw new Exception("Doesnot interect");
+		}
+		else{
+			while(count<=len2){
+				curr1 = curr1.next;
+				curr2 = curr2.next;
+				count++;
+			}
+			while(curr1!=null){
+				if(curr1==curr2){
+					return curr2;
+				}
+				curr1 = curr1.next;
+			}
+			throw new Exception("Doesnot interect");
+		}
+	}
+
 }

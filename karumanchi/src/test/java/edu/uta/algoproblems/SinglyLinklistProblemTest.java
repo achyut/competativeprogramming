@@ -255,10 +255,53 @@ public class SinglyLinklistProblemTest extends TestCase{
 	}
 	
 	public void testSortListInNlogN() throws Exception{
-		
+		//TODO:implementation remains
 	}
 
 	public void testIntersectionPointOfList() throws Exception{
+		SinglyLinklistProblems<Integer> sls = new SinglyLinklistProblems<Integer>();
+		SinglyList<Integer> sl = new SinglyList<Integer>();
+		SinglyNode<Integer> node1 = new SinglyNode<Integer>(1);
+		SinglyNode<Integer> node2 = new SinglyNode<Integer>(2);
+		SinglyNode<Integer> node3 = new SinglyNode<Integer>(3);
+		SinglyNode<Integer> node4 = new SinglyNode<Integer>(4);
+		
+		SinglyNode<Integer> node6 = new SinglyNode<Integer>(6);
+		SinglyNode<Integer> node7 = new SinglyNode<Integer>(7);
+		SinglyNode<Integer> node8 = new SinglyNode<Integer>(8);
+		SinglyNode<Integer> node9 = new SinglyNode<Integer>(9);
+		SinglyNode<Integer> node10 = new SinglyNode<Integer>(10);
+		SinglyNode<Integer> node11 = new SinglyNode<Integer>(11);
+		SinglyNode<Integer> node12 = new SinglyNode<Integer>(12);
+		SinglyNode<Integer> node13 = new SinglyNode<Integer>(13);
+		SinglyNode<Integer> node14 = new SinglyNode<Integer>(14);
+		SinglyNode<Integer> node15 = new SinglyNode<Integer>(15);
+		
+		SinglyList<Integer> sl1 = new SinglyList<Integer>();
+		SinglyList<Integer> sl2 = new SinglyList<Integer>();
+		
+		sl.addInTail(node1);
+		sl.addInTail(node2);
+		sl.addInTail(node3);
+		sl.addInTail(node4);
+		
+		sl1.addInTail(node6);
+		sl1.addInTail(node7);
+		sl1.addInTail(node8);
+		sl1.addInTail(node9);
+		sl1.addInTail(node10);
+		sl1.addInTail(node11);
+		sl1.addInTail(node12);
+		
+		
+		sl2.addInTail(node13);
+		sl2.addInTail(node14);
+		sl2.addInTail(node15);
+		
+		node4.next = node13;
+		node12.next=node13;
+		
+		assertEquals(13,(int)sls.findInterSectionNode(sl1,sl).value);
 		
 	}
 	
