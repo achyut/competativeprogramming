@@ -35,6 +35,39 @@ public class SinglyLinklistProblemTest extends TestCase{
 		assertEquals("node3",sls.findNthFromEndFast(sl,4));
 		assertEquals("node6",sls.findNthFromEndFast(sl,1));
 	}
+	public void testFindNthFromEndUsingRecursion() throws Exception{
+		SinglyLinklistProblems<String> sls = new SinglyLinklistProblems<String>();
+		SinglyList<String> sl = new SinglyList<String>();
+		sl.addInTail("node1");
+		sl.addInTail("node2");
+		sl.addInTail("node3");
+		sl.addInTail("node4");
+		sl.addInTail("node5");
+		sl.addInTail("node6");
+		//TODO:implementation remains
+		//assertEquals("node1",sls.findNthFromEndRecursion(sl,6));
+		//assertEquals("node3",sls.findNthFromEndFast(sl,4));
+		//assertEquals("node6",sls.findNthFromEndFast(sl,1));
+	}
+	
+	public void testRemoveNodeFromEnd() throws Exception{
+		//eg.Given linked list: 1->2->3->4->5, and n = 2.
+		//After removing the second node from the end, the linked list becomes 1->2->3->5.
+		SinglyLinklistProblems<String> sls = new SinglyLinklistProblems<String>();
+		SinglyList<String> sl = new SinglyList<String>();
+		sl.addInTail("node1");
+		sl.addInTail("node2");
+		sl.addInTail("node3");
+		sl.addInTail("node4");
+		sl.addInTail("node5");
+		sl.addInTail("node6");
+		sls.removeNthFromEnd(sl,6);
+		assertEquals("node2->node3->node4->node5->node6->/",sl.toString());
+		sls.removeNthFromEnd(sl,1);
+		assertEquals("node2->node3->node4->node5->/",sl.toString());
+		sls.removeNthFromEnd(sl,3);
+		assertEquals("node2->node4->node5->/",sl.toString());
+	}
 	
 	public void testFindIfLooopExists(){
 		SinglyLinklistProblems<String> sls = new SinglyLinklistProblems<String>();
@@ -198,5 +231,124 @@ public class SinglyLinklistProblemTest extends TestCase{
 		node2.value = 7;
 		sls.reverseList(sl);
 		assertTrue(sls.isSorted(sl));		
+	}
+	
+	public void testReverseAListFromMtoN()throws Exception{
+		//For example:
+		//Given 1->2->3->4->5->NULL, m = 2 and n = 4,
+		//return 1->4->3->2->5->NULL.
+		SinglyLinklistProblems<Integer> sls = new SinglyLinklistProblems<Integer>();
+		SinglyList<Integer> sl = new SinglyList<Integer>();
+		
+		sl.addInTail(1);
+		sl.addInTail(2);
+		sl.addInTail(3);
+		sl.addInTail(4);
+		sl.addInTail(5);
+		sl.addInTail(6);
+		sl.addInTail(7);
+		//System.out.println(sl);
+		assertEquals("1->2->3->4->5->6->7->/",sl.toString());
+		sls.reverseListFromMtoN(sl,2,4);
+		//System.out.println(sl);
+		assertEquals("1->4->3->2->5->6->7->/",sl.toString());
+	}
+	
+	public void testSortListInNlogN() throws Exception{
+		
+	}
+
+	public void testIntersectionPointOfList() throws Exception{
+		
+	}
+	
+	public void testFindMiddleOfList() throws Exception{
+		
+	}
+	
+	public void testDisplayListFromEnd() throws Exception{
+		
+	}
+	
+	public void testListIsOddOrEven() throws Exception{
+		
+	}
+	
+	public void testMergeTwoSortedList() throws Exception{
+		
+	}
+	
+	public void testReverseLinkListInPairs() throws Exception{
+		
+	}
+	public void testSplitCircularListIntoTwo() throws Exception{
+		
+	}
+	public void testIfListIsPalindrome() throws Exception{
+		
+	}
+	
+	public void testReverseByBlockOfKSize() throws Exception{
+		
+	}
+	
+	public void testReverseByBlockOfKSizeUsingRecursion() throws Exception{
+		
+	}
+	
+	public void testGetJosephPosition() throws Exception{
+		
+	}
+	public void testCloneWithRandomPointer() throws Exception{
+		//A linked list is given such that each node contains an additional random pointer which could point to any node in the list or null.
+		//Return a deep copy of the list.
+	}
+	
+	public void testReorderWithEndOfList() throws Exception{
+		
+	}
+	
+	public void testReorderWithEndOfListRecursive() throws Exception{
+		
+	}
+	
+	public void testInsertionSortOfList() throws Exception{
+		
+	}
+	
+	public void testRotateListByKElements() throws Exception{
+		//eg 1->2->3->4->5 if k=2 4->5->1->2->3->null
+	}
+	
+	public void testAddTwoNumbersInAList() throws Exception{
+		//eg. (3->4->3)+(5->6->4) = (8->0->8) // the numbers are stored in reverse order
+	}
+	
+	public void testPartitionWFromKSmallestElements() throws Exception{
+		//eg. 1->4->3->2->5->2 and k=3, return 1->2->2->4->3->5
+		//the original relative order should be preserved
+	}
+	
+	public void testMergeKSortedList() throws Exception{
+		
+	}
+	
+	public void testRemoveDuplicatesFromSortedList() throws Exception{
+		//eg.Given 1->1->2, return 1->2.
+		//Given 1->1->2->3->3, return 1->2->3.
+	}
+
+	public void testRemoveDuplicatesFromUnsortedList() throws Exception{
+		
+	}
+	
+	public void testRemoveElementWithValue(){
+		//eg.Given: 1 --> 2 --> 6 --> 3 --> 4 --> 5 --> 6, val = 6
+		//Return: 1 --> 2 --> 3 --> 4 --> 5
+	}
+	
+	public void testDeleteANodeWithOnlyThatNode(){
+		//Write a function to delete a node (except the tail) in a singly linked list, given only access to that node.
+		//Supposed the linked list is 1 -> 2 -> 3 -> 4 and you are given the third node with value 3, the linked list should become 1 -> 2 -> 4 after calling your function.
 	}
 }
