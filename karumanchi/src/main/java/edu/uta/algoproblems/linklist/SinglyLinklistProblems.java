@@ -567,4 +567,80 @@ public class SinglyLinklistProblems<Itemtype extends Comparable<Itemtype>> {
 		return mergedList.getHead();
 	}
 
+	/**
+	 * Method to reverse the linklist in pairs
+	 * @param sl
+	 */
+	public void reverseLinkListInPairs(SinglyList<Itemtype> sl) {
+		SinglyNode<Itemtype> curr1 = sl.getHead();
+		SinglyNode<Itemtype> curr2 = curr1.next;
+		sl.setHead(curr2);
+		
+		SinglyNode<Itemtype> pos1 = null;
+		SinglyNode<Itemtype> pos2 = null;
+		
+		while(curr1.next!=null && curr2.next!=null){
+			pos1 = curr1;
+			
+			pos2 = curr2.next;
+			curr2.next = curr1;
+			
+			
+			curr1 = pos2;
+			curr2 = curr1.next;
+			
+			pos1.next = curr2;
+			
+		}
+	/*	System.out.println(curr1.value);
+	//	System.out.println(curr2.value);
+		System.out.println(pos1.value);
+	//	System.out.println(curr2.value);
+	*/	pos1.next = curr1;
+		curr1.next = null;
+		
+	}
+
+	/**
+	 * Method to test if the list is palindrome or not.
+	 * This method uses stack so the space complexity is large.
+	 * @param sl
+	 * @return
+	 */
+	public boolean isPalindrome(SinglyList<Itemtype> sl) {
+		GenericStack<Itemtype> stack = new GenericStack<Itemtype>();
+		SinglyNode<Itemtype> slow = sl.getHead();
+		if(slow.next==null){
+			return false;
+		}
+		SinglyNode<Itemtype> fast = slow.next.next;
+		while(fast!=null){
+			stack.push(slow.value);
+			slow = slow.next;
+			if(fast.next!=null){
+				fast = fast.next.next;	
+			}
+			else{
+				fast = fast.next;	
+			}
+		}
+		slow = slow.next;
+		while(slow!=null && !stack.isEmpty()){
+			if(slow.value.compareTo(stack.pop())!=0){
+				return false;
+			}
+			slow = slow.next;
+		}
+		
+		if(slow==null && !stack.isEmpty()){
+			return false;
+		}
+		else if(slow!=null && stack.isEmpty()){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+
 }

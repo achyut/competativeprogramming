@@ -389,12 +389,60 @@ public class SinglyLinklistProblemTest extends TestCase{
 	
 	
 	public void testReverseLinkListInPairs() throws Exception{
+		SinglyLinklistProblems<String> sls = new SinglyLinklistProblems<String>();
+		SinglyList<String> sl = new SinglyList<String>();
+		sl.addInTail("node1");
+		sl.addInTail("node2");
+		sl.addInTail("node3");
+		sl.addInTail("node4");
+		sl.addInTail("node5");
+		sl.addInTail("node6");
+		sl.addInTail("node7");
+		sl.addInTail("node8");
+		sl.addInTail("node9");
+		//System.out.println(sl.printList());
+		sls.reverseLinkListInPairs(sl);
+		assertEquals("node2->node1->node4->node3->node6->node5->node8->node7->node9->/",sl.printList());
+		//System.out.println(sl.printList());
+		
 		
 	}
 	public void testSplitCircularListIntoTwo() throws Exception{
 		
 	}
+	
 	public void testIfListIsPalindrome() throws Exception{
+		SinglyLinklistProblems<String> sls = new SinglyLinklistProblems<String>();
+		SinglyList<String> sl = new SinglyList<String>();
+		sl.addInTail("node1");
+		sl.addInTail("node2");
+		sl.addInTail("node3");
+		sl.addInTail("node4");
+		sl.addInTail("node3");
+		sl.addInTail("node2");
+		sl.addInTail("node1");
+		assertTrue(sls.isPalindrome(sl));
+		
+		SinglyList<String> sl1 = new SinglyList<String>();
+		sl1.addInTail("node1");
+		sl1.addInTail("node2");
+		sl1.addInTail("node1");
+		assertTrue(sls.isPalindrome(sl1));
+		
+		SinglyList<String> sl2 = new SinglyList<String>();
+		sl2.addInTail("node1");
+		sl2.addInTail("node2");
+		sl2.addInTail("node3");
+		sl2.addInTail("node4");
+		sl2.addInTail("node3");
+		sl2.addInTail("node1");
+		sl2.addInTail("node2");
+		assertFalse(sls.isPalindrome(sl2));
+		
+		SinglyList<String> sl3 = new SinglyList<String>();
+		sl3.addInTail("node1");
+		sl3.addInTail("node2");
+		assertFalse(sls.isPalindrome(sl3));
 		
 	}
 	
