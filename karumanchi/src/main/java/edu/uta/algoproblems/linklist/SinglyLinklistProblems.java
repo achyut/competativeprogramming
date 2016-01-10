@@ -1,15 +1,17 @@
 package edu.uta.algoproblems.linklist;
 
+import com.sui.datastructures.GenericStack;
 import com.sui.datastructures.SinglyList;
+import com.sui.datastructures.Stack;
 import com.sui.datastructures.nodes.SinglyNode;
 
 public class SinglyLinklistProblems<Itemtype extends Comparable<Itemtype>> {
 
 	/**
 	 * @author achyut O(n)+O(n) solution In this solution we first traverse to
-	 *         the end of the list to get the length of the list and after that
-	 *         we find the location of the node by comparison and return the
-	 *         node
+	 * the end of the list to get the length of the list and after that
+	 * we find the location of the node by comparison and return the
+	 * node
 	 * @param sl
 	 * @param i
 	 * @return
@@ -361,6 +363,13 @@ public class SinglyLinklistProblems<Itemtype extends Comparable<Itemtype>> {
 		sl.decreaseLength(1);
 	}
 
+	/**
+	 * Method to find the intersection node from given two link list
+	 * @param sl
+	 * @param sl1
+	 * @return
+	 * @throws Exception
+	 */
 	public SinglyNode<Itemtype> findInterSectionNode(SinglyList<Itemtype> sl, SinglyList<Itemtype> sl1) throws Exception{
 		SinglyNode<Itemtype> curr1 = sl.getHead();
 		SinglyNode<Itemtype> curr2 = sl1.getHead();
@@ -395,6 +404,167 @@ public class SinglyLinklistProblems<Itemtype extends Comparable<Itemtype>> {
 			}
 			throw new Exception("Doesnot interect");
 		}
+	}
+
+	/**
+	 * Method to delete the node given the reference to only that node such that the given 
+	 * Supposed the linked list is 1 -> 2 -> 3 -> 4 and you are given the third node with value 3, 
+	 * the linked list should become 1 -> 2 -> 4 after calling your function.
+	 * node is not a tail node
+	 * @param nodeToDelete
+	 */
+	public void deleteNodeWithPointerToOnlyThatNode(SinglyNode<Itemtype> nodeToDelete) {
+		SinglyNode<Itemtype> slowNode = nodeToDelete;
+		nodeToDelete.value = nodeToDelete.next.value;
+		nodeToDelete = nodeToDelete.next;
+		while(nodeToDelete.next!=null){
+			nodeToDelete.value = nodeToDelete.next.value;
+			nodeToDelete = nodeToDelete.next;	
+			slowNode = slowNode.next;
+		}
+		slowNode.next = null;
+		nodeToDelete.next = null;
+	}
+
+	/**
+	 * Method to delete an elements by value of the elements.
+	 * eg.Given: 1 --> 2 --> 6 --> 3 --> 4 --> 5 --> 6, val = 6
+	 * Return: 1 --> 2 --> 3 --> 4 --> 5
+	 * @param sl
+	 * @param string
+	 */
+	public void removeElementByValue(SinglyList<Itemtype> sl, Itemtype val) {
+		SinglyNode<Itemtype> slow = sl.getHead();
+		SinglyNode<Itemtype> curr = slow.next;
+		while(curr!=null){
+			if(curr.value == val){
+				sl.decreaseLength(1);
+				slow.next = curr.next;
+			}
+			else{
+				slow = curr;
+			}
+			curr = curr.next;
+		}
+	}
+
+	/**
+	 * Method to remove duplicates from a sorted list
+	 * eg.Given 1->1->2, return 1->2.
+	 * Given 1->1->2->3->3, return 1->2->3.
+	 * @param sl
+	 */
+	public void removeDuplicatesFromSortedList(SinglyList<Itemtype> sl) {
+		SinglyNode<Itemtype> curr1 = sl.getHead();
+		SinglyNode<Itemtype> curr2 = sl.getHead().next;
+		while(curr2!=null){
+			if(curr1.value==curr2.value){
+				curr1.next = curr2.next;
+				sl.decreaseLength(1);
+			}
+			else{
+				curr1 = curr2;
+			}
+			curr2 = curr2.next;
+		}
+	}
+
+	/**
+	 * Method to find the middle of a singly link list
+	 * @param sl
+	 * @return
+	 */
+	public SinglyNode<Itemtype> findMiddleOfList(SinglyList<Itemtype> sl) {
+		SinglyNode<Itemtype> slow = sl.getHead();
+		if(slow.next==null){
+			return slow;
+		}
+		SinglyNode<Itemtype> fast = slow.next.next;
+		while(fast!=null && fast.next!=null){
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+		return slow;
+	}
+
+	/**
+	 * Method to check if the list contains even number of elements or not
+	 * @param sl
+	 * @return
+	 */
+	public boolean isListEven(SinglyList<Itemtype> sl) {
+		SinglyNode<Itemtype> slow = sl.getHead();
+		if(slow.next==null){
+			return false;
+		}
+		SinglyNode<Itemtype> fast = slow.next.next;
+		while(fast!=null && fast.next!=null){
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+		if(fast==null){
+			return true;
+		}
+		return false;
+	}
+
+	
+	/**
+	 * Method to display the list from the end.
+	 * This implementation uses stack to store the elements and then pops the stack and displays
+	 * the elements
+	 * @param sl
+	 * @return
+	 * @throws Exception 
+	 */
+	public String displayListFromEnd(SinglyList<Itemtype> sl) throws Exception {
+		GenericStack<SinglyNode<Itemtype>> stack = new GenericStack<SinglyNode<Itemtype>>();
+		SinglyNode<Itemtype> curr = sl.getHead();
+		while(curr!=null){
+			stack.push(curr);
+			curr = curr.next;
+		}
+		String str = "";
+		while(!stack.isEmpty()){
+			str+=stack.pop().value+"->";
+		}
+		str+="/";
+		return str;
+	}
+
+	/**
+	 * Method to merge two sorted list to a single list using extra memory
+	 * @param sl1
+	 * @param sl2
+	 * @return
+	 */
+	public SinglyNode<Itemtype> getMergedListUsingExtraMemory(SinglyList<Itemtype> sl1, SinglyList<Itemtype> sl2) {
+		SinglyList<Itemtype> mergedList = new SinglyList<Itemtype>();
+		SinglyNode<Itemtype> curr1 = sl1.getHead();
+		SinglyNode<Itemtype> curr2 = sl2.getHead();
+		while(curr1!=null && curr2!=null){
+			if(curr1.value.compareTo(curr2.value)<0){
+				mergedList.addInTail(curr1.value);
+				curr1 = curr1.next;
+			}
+			else{
+				mergedList.addInTail(curr2.value);
+				curr2 = curr2.next;
+			}
+		}
+		if(curr1==null && curr2!=null){
+			while(curr2!=null){
+				mergedList.addInTail(curr2.value);
+				curr2 = curr2.next;
+			}
+		}
+		else{
+			while(curr1!=null){
+				mergedList.addInTail(curr1.value);
+				curr1 = curr1.next;
+			}
+		}
+		return mergedList.getHead();
 	}
 
 }

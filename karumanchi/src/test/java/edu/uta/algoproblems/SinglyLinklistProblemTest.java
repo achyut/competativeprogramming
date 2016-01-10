@@ -1,6 +1,7 @@
 package edu.uta.algoproblems;
 
 import com.sui.datastructures.SinglyList;
+import com.sui.datastructures.Stack;
 import com.sui.datastructures.nodes.SinglyNode;
 
 import edu.uta.algoproblems.linklist.SinglyLinklistProblems;
@@ -306,20 +307,86 @@ public class SinglyLinklistProblemTest extends TestCase{
 	}
 	
 	public void testFindMiddleOfList() throws Exception{
-		
+		SinglyLinklistProblems<String> sls = new SinglyLinklistProblems<String>();
+		SinglyList<String> sl = new SinglyList<String>();
+		sl.addInTail("node1");
+		sl.addInTail("node2");
+		sl.addInTail("node3");
+		sl.addInTail("node4");
+		sl.addInTail("node5");
+		sl.addInTail("node6");
+		assertEquals("node3",sls.findMiddleOfList(sl).value);
+		sl.addInTail("node7");
+		assertEquals("node3",sls.findMiddleOfList(sl).value);
+		sl.addInTail("node8");
+		assertEquals("node4",sls.findMiddleOfList(sl).value);
 	}
 	
 	public void testDisplayListFromEnd() throws Exception{
-		
+		SinglyLinklistProblems<String> sls = new SinglyLinklistProblems<String>();
+		SinglyList<String> sl = new SinglyList<String>();
+		sl.addInTail("node1");
+		sl.addInTail("node2");
+		sl.addInTail("node3");
+		sl.addInTail("node4");
+		sl.addInTail("node5");
+		sl.addInTail("node6");
+		assertEquals("node6->node5->node4->node3->node2->node1->/",sls.displayListFromEnd(sl));
 	}
 	
 	public void testListIsOddOrEven() throws Exception{
-		
+		SinglyLinklistProblems<String> sls = new SinglyLinklistProblems<String>();
+		SinglyList<String> sl = new SinglyList<String>();
+		sl.addInTail("node1");
+		sl.addInTail("node2");
+		sl.addInTail("node3");
+		sl.addInTail("node4");
+		sl.addInTail("node5");
+		sl.addInTail("node6");
+		assertTrue(sls.isListEven(sl));
+		sl.addInTail("node7");
+		assertFalse(sls.isListEven(sl));
 	}
 	
 	public void testMergeTwoSortedList() throws Exception{
+		SinglyLinklistProblems<Integer> sls = new SinglyLinklistProblems<Integer>();
+		SinglyList<Integer> sl1 = new SinglyList<Integer>();
+		sl1.addInTail(1);
+		sl1.addInTail(2);
+		sl1.addInTail(3);
+		sl1.addInTail(4);
+		sl1.addInTail(5);
+		sl1.addInTail(6);
+		
+		SinglyList<Integer> sl2 = new SinglyList<Integer>();
+		sl2.addInTail(11);
+		sl2.addInTail(12);
+		sl2.addInTail(13);
+		sl2.addInTail(14);
+		sl2.addInTail(15);
+		sl2.addInTail(16);
+		
+		//System.out.println(sl1);
+		//System.out.println(sl2);
+		
+		//System.out.println(sl1.printList(sls.getMergedList(sl1,sl2)));
+		assertEquals("1->2->3->4->5->6->11->12->13->14->15->16->/",sl1.printList(sls.getMergedListUsingExtraMemory(sl1,sl2)));
+		
+		
+		SinglyList<Integer> sl3 = new SinglyList<Integer>();
+		sl3.addInTail(1);
+		sl3.addInTail(1);
+		sl3.addInTail(3);
+		sl3.addInTail(7);
+		sl3.addInTail(8);
+		sl3.addInTail(10);
+		//System.out.println(sl3);
+		//System.out.println(sl1.printList(sls.getMergedList(sl1,sl3)));
+		assertEquals("1->1->1->2->3->3->4->5->6->7->8->10->/",sl1.printList(sls.getMergedListUsingExtraMemory(sl1,sl3)));
+		
 		
 	}
+	
 	
 	public void testReverseLinkListInPairs() throws Exception{
 		
@@ -379,19 +446,62 @@ public class SinglyLinklistProblemTest extends TestCase{
 	public void testRemoveDuplicatesFromSortedList() throws Exception{
 		//eg.Given 1->1->2, return 1->2.
 		//Given 1->1->2->3->3, return 1->2->3.
-	}
-
-	public void testRemoveDuplicatesFromUnsortedList() throws Exception{
+		SinglyLinklistProblems<String> sls = new SinglyLinklistProblems<String>();
+		SinglyList<String> sl = new SinglyList<String>();
+		sl.addInTail("node1");
+		sl.addInTail("node2");
+		sl.addInTail("node2");
+		sl.addInTail("node3");
+		sl.addInTail("node4");
+		sl.addInTail("node4");
+		sl.addInTail("node5");
+		sl.addInTail("node6");
+		sls.removeDuplicatesFromSortedList(sl);
+		assertEquals("node1->node2->node3->node4->node5->node6->/",sl.printList());
 		
 	}
-	
+
 	public void testRemoveElementWithValue(){
 		//eg.Given: 1 --> 2 --> 6 --> 3 --> 4 --> 5 --> 6, val = 6
 		//Return: 1 --> 2 --> 3 --> 4 --> 5
+		SinglyLinklistProblems<String> sls = new SinglyLinklistProblems<String>();
+		SinglyList<String> sl = new SinglyList<String>();
+		sl.addInTail("node1");
+		sl.addInTail("node2");
+		sl.addInTail("node3");
+		sl.addInTail("node4");
+		sl.addInTail("node3");
+		sl.addInTail("node6");
+		sls.removeElementByValue(sl,"node3");
+		assertEquals("node1->node2->node4->node6->/",sl.printList());
 	}
 	
 	public void testDeleteANodeWithOnlyThatNode(){
 		//Write a function to delete a node (except the tail) in a singly linked list, given only access to that node.
 		//Supposed the linked list is 1 -> 2 -> 3 -> 4 and you are given the third node with value 3, the linked list should become 1 -> 2 -> 4 after calling your function.
+		SinglyLinklistProblems<String> sls = new SinglyLinklistProblems<String>();
+		SinglyList<String> sl = new SinglyList<String>();
+		SinglyNode<String> node8 = new SinglyNode<String>("node8");
+		SinglyNode<String> node7 = new SinglyNode<String>("node7");
+		SinglyNode<String> node6 = new SinglyNode<String>("node6");
+		SinglyNode<String> node5 = new SinglyNode<String>("node5");
+		SinglyNode<String> node4 = new SinglyNode<String>("node4");
+		SinglyNode<String> node3 = new SinglyNode<String>("node3");
+		SinglyNode<String> node2 = new SinglyNode<String>("node2");
+		SinglyNode<String> node1 = new SinglyNode<String>("node1");
+		
+		sl.addInTail(node1);
+		sl.addInTail(node2);
+		sl.addInTail(node3);
+		sl.addInTail(node4);
+		sl.addInTail(node5);
+		sl.addInTail(node6);
+		sl.addInTail(node7);
+		sl.addInTail(node8);
+		SinglyNode<String> nodeToDelete = node3;
+		sls.deleteNodeWithPointerToOnlyThatNode(nodeToDelete);
+		sl.decreaseLength(1);
+		assertEquals("node1->node2->node4->node5->node6->node7->node8->/",sl.toString());
+		
 	}
 }
