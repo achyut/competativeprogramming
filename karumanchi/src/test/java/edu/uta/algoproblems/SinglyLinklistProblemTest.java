@@ -442,8 +442,7 @@ public class SinglyLinklistProblemTest extends TestCase{
 		SinglyList<String> sl3 = new SinglyList<String>();
 		sl3.addInTail("node1");
 		sl3.addInTail("node2");
-		assertFalse(sls.isPalindrome(sl3));
-		
+		assertFalse(sls.isPalindrome(sl3));	
 	}
 	
 	public void testReverseByBlockOfKSize() throws Exception{
@@ -476,10 +475,31 @@ public class SinglyLinklistProblemTest extends TestCase{
 	
 	public void testRotateListByKElements() throws Exception{
 		//eg 1->2->3->4->5 if k=2 4->5->1->2->3->null
+		SinglyLinklistProblems<String> sls = new SinglyLinklistProblems<String>();
+		SinglyList<String> sl = new SinglyList<String>();
+		sl.addInTail("node1");
+		sl.addInTail("node2");
+		sl.addInTail("node3");
+		sl.addInTail("node4");
+		sl.addInTail("node5");
+		sls.rotateListByKElements(sl,2);
+		//System.out.println(sl.printList());
+		assertEquals("node4->node5->node1->node2->node3->/",sl.printList());
 	}
 	
 	public void testAddTwoNumbersInAList() throws Exception{
 		//eg. (3->4->3)+(5->6->4) = (8->0->8) // the numbers are stored in reverse order
+		SinglyLinklistProblems<Integer> sls = new SinglyLinklistProblems<Integer>();
+		SinglyList<Integer> sl1 = new SinglyList<Integer>();
+		sl1.addInTail(3);
+		sl1.addInTail(4);
+		sl1.addInTail(3);
+		
+		SinglyList<Integer> sl2 = new SinglyList<Integer>();
+		sl2.addInTail(5);
+		sl2.addInTail(6);
+		sl2.addInTail(4);
+		assertEquals("8->0->8->/",sl1.printList(sls.addTwoNumbersInAList(sl1,sl2)));
 	}
 	
 	public void testPartitionWFromKSmallestElements() throws Exception{

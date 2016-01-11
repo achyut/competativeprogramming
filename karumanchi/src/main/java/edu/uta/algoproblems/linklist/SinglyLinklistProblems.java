@@ -643,4 +643,59 @@ public class SinglyLinklistProblems<Itemtype extends Comparable<Itemtype>> {
 		}
 	}
 
+	public void rotateListByKElements(SinglyList<Itemtype> sl, int i) {
+		int count = 0;
+		SinglyNode<Itemtype> fast = sl.getHead();
+		SinglyNode<Itemtype> slow = sl.getHead();
+		while(count<i){
+			fast = fast.next;
+			count++;
+		}
+		while(fast!=null && fast.next!=null){
+			fast = fast.next;
+			slow = slow.next;
+		}
+		if(fast!=null){
+			fast.next = sl.getHead();	
+		}
+		else{
+			if(slow.next!=null){
+				slow.next.next = slow;	
+			}
+		}
+		sl.setHead(slow.next);
+		slow.next = null;
+	}
+
+	/**
+	 * Method to add numbers in two list and return the result.
+	 * @param sl1
+	 * @param sl2
+	 * @return
+	 */
+	public SinglyNode<Integer> addTwoNumbersInAList(SinglyList<Integer> sl1, SinglyList<Integer> sl2) {
+		SinglyList<Integer> result = new SinglyList<Integer>();
+		SinglyNode<Integer> curr1 = sl1.getHead();
+		SinglyNode<Integer> curr2 = sl2.getHead();
+		int carry = 0;
+		while(curr1!=null && curr2!=null){
+			Integer res = (curr1.value + curr2.value)+carry;
+			if(res>=10){
+				carry = 1;
+				res = res%10;
+			}
+			else{
+				carry = 0;
+			}
+			result.addInTail(res);
+			res = 0;
+			curr1 = curr1.next;
+			curr2 = curr2.next;
+		}
+		if(carry!=0){
+			result.addInTail(carry);
+		}
+		return result.getHead();
+	}
+
 }
