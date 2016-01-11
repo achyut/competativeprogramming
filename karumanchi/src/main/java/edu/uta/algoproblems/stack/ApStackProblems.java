@@ -57,4 +57,25 @@ public class ApStackProblems {
 		return String.valueOf(res);
 	}
 
+	public String evaluatePrefixExpression(String[] exp) throws Exception{
+		GenericStack<String> operandStack = new GenericStack<String>();
+		GenericStack<String> operationStack = new GenericStack<String>();
+		for(int i=0;i<exp.length;i++){
+			String curr = exp[i];
+			if(curr.equals("+") || curr.equals("-") || curr.equals("*") || curr.equals("/")){
+				operationStack.push(curr);
+			}
+			else{
+				operandStack.push(curr);
+			}
+		}
+		while(!operationStack.isEmpty()){
+			String op1 = operandStack.pop();
+			String op2 = operandStack.pop();
+			String res = calculate(op2,op1,operationStack.pop());
+			operandStack.push(res);
+		}
+		return operandStack.pop();
+	}
+
 }

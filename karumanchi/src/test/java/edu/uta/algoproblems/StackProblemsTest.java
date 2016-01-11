@@ -52,8 +52,12 @@ public class StackProblemsTest extends TestCase{
 		assertEquals("6",sp.evaluatePostfixExpression(exp2));
 	}
 	
-	public void testEvalutaionOfInfixExpressionInOnePass(){
-		
+	public void testEvalutaionOfInfixExpressionInOnePass() throws Exception{
+		String[] exp = {"*","3","+","1","2"};
+		ApStackProblems sp = new ApStackProblems();
+		assertEquals("9",sp.evaluatePrefixExpression(exp));
+		String[] exp2 = {"+","/","4","13","5"};
+		assertEquals("6",sp.evaluatePrefixExpression(exp2));
 	}
 	
 	public void testAdvancedStack(){
