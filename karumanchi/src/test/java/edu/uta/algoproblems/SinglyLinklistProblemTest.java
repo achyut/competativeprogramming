@@ -1,7 +1,7 @@
 package edu.uta.algoproblems;
 
+import com.sui.datastructures.CircularList;
 import com.sui.datastructures.SinglyList;
-import com.sui.datastructures.Stack;
 import com.sui.datastructures.nodes.SinglyNode;
 
 import edu.uta.algoproblems.linklist.SinglyLinklistProblems;
@@ -405,10 +405,28 @@ public class SinglyLinklistProblemTest extends TestCase{
 		assertEquals("node2->node1->node4->node3->node6->node5->node8->node7->node9->/",sl.printList());
 		//System.out.println(sl.printList());
 		
-		
 	}
 	public void testSplitCircularListIntoTwo() throws Exception{
-		
+		SinglyLinklistProblems<String> sls = new SinglyLinklistProblems<String>();
+		CircularList<String> sl= new CircularList<String>();
+		sl.addInTail("node1");
+		sl.addInTail("node2");
+		sl.addInTail("node3");
+		sl.addInTail("node4");
+		sl.addInTail("node5");
+		sl.addInTail("node6");
+		sl.addInTail("node7");
+		sl.addInTail("node8");
+		//sl.addInTail("node9");
+		//System.out.println(sl);
+		SinglyList<SinglyNode<String>> sl1 = sls.splitCircularList(sl); 
+		SinglyNode<String> cl1 = sl1.getHead().value;
+		SinglyNode<String> cl2 = sl1.getTail().value;
+		//System.out.println(cl1.next.value);
+		//System.out.println(sl.printList(cl1));
+		//System.out.println(sl.printList(cl2));
+		assertEquals("node1->node2->node3->node4->/",sl.printList(cl1));
+		assertEquals("node5->node6->node7->node8->/",sl.printList(cl2));
 	}
 	
 	public void testIfListIsPalindrome() throws Exception{
@@ -459,6 +477,7 @@ public class SinglyLinklistProblemTest extends TestCase{
 	public void testCloneWithRandomPointer() throws Exception{
 		//A linked list is given such that each node contains an additional random pointer which could point to any node in the list or null.
 		//Return a deep copy of the list.
+		
 	}
 	
 	public void testReorderWithEndOfList() throws Exception{
@@ -502,13 +521,21 @@ public class SinglyLinklistProblemTest extends TestCase{
 		assertEquals("8->0->8->/",sl1.printList(sls.addTwoNumbersInAList(sl1,sl2)));
 	}
 	
-	public void testPartitionWFromKSmallestElements() throws Exception{
+	public void testPartitionFromKSmallestElements() throws Exception{
 		//eg. 1->4->3->2->5->2 and k=3, return 1->2->2->4->3->5
 		//the original relative order should be preserved
-	}
-	
-	public void testMergeKSortedList() throws Exception{
-		
+		SinglyLinklistProblems<String> sls = new SinglyLinklistProblems<String>();
+		SinglyList<Integer> sl1 = new SinglyList<Integer>();
+		sl1.addInTail(8);
+		sl1.addInTail(4);
+		sl1.addInTail(3);
+		sl1.addInTail(2);
+		sl1.addInTail(5);
+		sl1.addInTail(2);
+		//System.out.println(sl1);
+		sls.partitionFromKSmallestElement(sl1,3);
+		//System.out.println(sl1.printList());
+		assertEquals("3->2->2->8->4->5->/",sl1.printList());
 	}
 	
 	public void testRemoveDuplicatesFromSortedList() throws Exception{

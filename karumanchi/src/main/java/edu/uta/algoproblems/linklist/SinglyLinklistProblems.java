@@ -1,8 +1,8 @@
 package edu.uta.algoproblems.linklist;
 
+import com.sui.datastructures.CircularList;
 import com.sui.datastructures.GenericStack;
 import com.sui.datastructures.SinglyList;
-import com.sui.datastructures.Stack;
 import com.sui.datastructures.nodes.SinglyNode;
 
 public class SinglyLinklistProblems<Itemtype extends Comparable<Itemtype>> {
@@ -696,6 +696,74 @@ public class SinglyLinklistProblems<Itemtype extends Comparable<Itemtype>> {
 			result.addInTail(carry);
 		}
 		return result.getHead();
+	}
+
+	/**
+	 * Method to seperate the list into two partitions with k smallest list from i to the left
+	 * @param sl1
+	 * @param i
+	 */
+	public void partitionFromKSmallestElement(SinglyList<Integer> sl1, int i) {
+		SinglyNode<Integer> curr = sl1.getHead();
+		SinglyNode<Integer> large = null;
+		SinglyNode<Integer> small = null;
+		SinglyNode<Integer> largestart = null;
+		SinglyNode<Integer> smallstart = null;
+		while(curr!=null){
+			if(curr.value>i){
+				if(large==null){
+					large = curr;
+					largestart = curr;
+				}
+				else{
+					large.next = curr;	
+				}
+				large = curr;
+				
+			}
+			else{
+				if(small == null){
+					small = curr;
+					smallstart = curr;
+				}
+				else{
+					small.next = curr;
+				}
+				small = curr;
+			}
+			curr = curr.next;
+		}
+		sl1.setHead(smallstart);
+		small.next = largestart;
+		large.next = null;
+	}
+
+	/**
+	 * Method to split a circular list.
+	 * @param sl
+	 * @return
+	 */
+	public SinglyList<SinglyNode<Itemtype>> splitCircularList(CircularList<Itemtype> sl) {
+		SinglyNode<Itemtype> curr = sl.getHead().next;
+		SinglyNode<Itemtype> cl1 = sl.getHead();
+		SinglyNode<Itemtype> slow = sl.getHead();
+		while(curr!=sl.getHead() && curr.next!=sl.getHead()){
+			if(curr.next.next==sl.getHead()){
+				curr = curr.next;
+			}
+			else{
+				curr = curr.next.next;	
+				slow = slow.next;
+			}
+		}
+		cl1 = slow.next;
+		slow.next = sl.getHead();
+		curr.next = cl1;
+		
+		SinglyList<SinglyNode<Itemtype>> newlist = new SinglyList<SinglyNode<Itemtype>>();
+		newlist.addInHead(cl1);
+		newlist.addInHead(sl.getHead());
+		return newlist;
 	}
 
 }
