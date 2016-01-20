@@ -10,11 +10,12 @@ public class PrintUtils {
 		System.out.println("");
 	}
 	
-	public static void printArray(int[] arr){
+	public static String printArray(int[] arr){
 		//System.out.println("");
+		String output = "";
 		for(int i =0;i<arr.length;i++){
-			System.out.print(arr[i]+" ");
+			output += arr[i]+" ";
 		}
-		System.out.println("");
+		return output;
 	}	
 }
