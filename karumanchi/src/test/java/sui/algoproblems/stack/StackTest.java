@@ -77,4 +77,13 @@ public class StackTest extends TestCase{
 		//int max=stp.MaxRectangle(height);
 		assertEquals(10,stp.MaxRectangle(height));
 	}
+	public void testTrapWater(){
+		StackProblems stp=new StackProblems();
+		int height[]={2,1,0,2};
+		int water=stp.TrapWater(height);
+		assertEquals(3,water);
+	}
+	
+	
+	
 }
