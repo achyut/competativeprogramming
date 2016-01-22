@@ -1,9 +1,16 @@
 package edu.uta.algoproblems.trees;
 
+import com.sui.datastructures.GenericStack;
+import com.sui.datastructures.Queue;
+import com.sui.datastructures.Stack;
 import com.sui.datastructures.nodes.TreeNode;
 
 public class ApTreeProblems{
 
+	/**
+	 * Method to create a complete tree having 7 Nodes
+	 * @return
+	 */
 	public TreeNode<Integer> createCompleteTree(){
 		TreeNode<Integer> root = new TreeNode<Integer>(1);
 		
@@ -26,6 +33,10 @@ public class ApTreeProblems{
 		return root;
 	}
 	
+	/**
+	 * Method to create a complete tree having 15 nodes
+	 * @return
+	 */
 	public TreeNode<Integer> createLargeTree(){
 		TreeNode<Integer> root = new TreeNode<Integer>(1);
 		
@@ -69,7 +80,264 @@ public class ApTreeProblems{
 		
 		return root;
 	}
+
+	/**
+	 * Method for recursive preorder traversal
+	 * @param root
+	 * @return
+	 */
+	public String preOrder(TreeNode<Integer> root) {
+		String res = "";
+		if(root==null){
+			return res;
+		}
+		res+=root.value+",";
+		res+=preOrder(root.getLeft());
+		res+=preOrder(root.getRight());
+		return res;
+	}
+
+	/**
+	 * Method for doing recursive inorder traversal
+	 * @param root
+	 * @return
+	 */
+	public String inOrder(TreeNode<Integer> root) {
+		String res = "";
+		if(root==null){
+			return res;
+		}
+		res+=inOrder(root.getLeft());
+		res+=root.value+",";
+		res+=inOrder(root.getRight());
+		return res;
+	}
+
+	/**
+	 * Method to do post order traversal of a tree using recursion
+	 * @param root
+	 * @return
+	 */
+	public String postOrder(TreeNode<Integer> root) {
+		String res = "";
+		if(root==null){
+			return res;
+		}
+		res+=postOrder(root.getLeft());
+		res+=postOrder(root.getRight());
+		res+=root.value+",";
+		return res;
+	}
+
+	/**
+	 * Method for iterative traversal of tree in preorder
+	 * @param root
+	 * @return
+	 */
+	public String preOrderIterative(TreeNode<Integer> root) {
+		GenericStack<TreeNode<Integer>> stack = new GenericStack<TreeNode<Integer>>();
+		String res = "";
+		if(root==null){
+			return res;
+		}
+		stack.push(root);
+		while(!stack.isEmpty()){
+			TreeNode<Integer> node = stack.pop();
+			res+=node.value+",";
+			if(node.getRight()!=null){
+				stack.push(node.getRight());
+			}
+			if(node.getLeft()!=null){
+				stack.push(node.getLeft());
+			}
+		}
+		return res;
+	}
+
+	/**
+	 * Iterative traversal of inorder
+	 * @param root
+	 * @return
+	 */
+	public String inOrderIterative(TreeNode<Integer> root) {
+		GenericStack<TreeNode<Integer>> stack = new GenericStack<TreeNode<Integer>>();
+		String res = "";
+		if(root==null){
+			return res;
+		}
+		boolean done = false;
+		TreeNode<Integer> curr = root;
+		while(!done){
+			while(curr!=null){
+				stack.push(curr);
+				curr = curr.getLeft();
+			}
+			if(stack.isEmpty()){
+				done = true;
+			}
+			else{
+				TreeNode<Integer> val = stack.pop();
+				res+=val.value+",";
+				curr = val.getRight();
+			}
+		}
+		return res;
+	}
+
+	/**
+	 * Method for post order traversal of tree using the stacks
+	 * this method is not a compact method and has some redundant code
+	 * in the next implementation we have refactored the code
+	 * @param root
+	 * @return
+	 */
+	public String postOrderIterative(TreeNode<Integer> root) {
+		GenericStack<TreeNode<Integer>> stack = new GenericStack<TreeNode<Integer>>();
+		String res = "";
+		if(root==null){
+			return res;
+		}
+		stack.push(root);
+		TreeNode<Integer> prev = null;
+		TreeNode<Integer> curr = null;
+		while(!stack.isEmpty()){
+			curr = stack.peek();
+			if(prev==null || prev.getLeft()==curr || prev.getRight()==curr){
+				if(curr.getLeft()!=null){
+					stack.push(curr.getLeft());
+				}
+				else if(curr.getRight()!=null){
+					stack.push(curr.getRight());
+				}
+				else{
+					res+=curr.value+",";
+					stack.pop();	
+				}
+			}
+			else if(curr.getLeft()==prev){
+				if(curr.getRight()!=null){
+					stack.push(curr.getRight());
+				}
+				else{
+					res+=curr.value+",";
+					stack.pop();
+				}
+			}
+			else if(curr.getRight()==prev){
+				res+=curr.value+",";
+				stack.pop();
+			}
+			prev = curr;
+			
+		}
+		return res;
+	}
 	
+	/**
+	 * Post order traversal of stack.
+	 * This implementation has a compact code removing the redundant code from the 
+	 * previous implementation
+	 * @param root
+	 * @return
+	 */
+	public String postOrderIterative1(TreeNode<Integer> root) {
+		GenericStack<TreeNode<Integer>> stack = new GenericStack<TreeNode<Integer>>();
+		String res = "";
+		if(root==null){
+			return res;
+		}
+		stack.push(root);
+		TreeNode<Integer> prev = null;
+		TreeNode<Integer> curr = null;
+		while(!stack.isEmpty()){
+			curr = stack.peek();
+			if(prev==null || prev.getLeft()==curr || prev.getRight()==curr){
+				if(curr.getLeft()!=null){
+					stack.push(curr.getLeft());
+				}
+				else if(curr.getRight()!=null){
+					stack.push(curr.getRight());
+				}
+			}
+			else if(curr.getLeft()==prev && curr.getRight()!=null){
+				stack.push(curr.getRight());
+			}
+			else{
+				res+=curr.value+",";
+				stack.pop();
+			}
+			prev = curr;
+			
+		}
+		return res;
+	}
+
+	/**
+	 * This is the implementation of post order traversal using two stacks
+	 * @param root2
+	 * @return
+	 */
+	public String postOrderIterative2(TreeNode<Integer> root) {
+		String res = "";
+		if(root==null){
+			return res;
+		}
+		else{
+			GenericStack<TreeNode<Integer>> stack1 = new GenericStack<TreeNode<Integer>>();
+			GenericStack<TreeNode<Integer>> stack2 = new GenericStack<TreeNode<Integer>>();
+			stack1.push(root);
+			while(!stack1.isEmpty()){
+				TreeNode<Integer> val = stack1.pop();
+				stack2.push(val);
+				if(val.getLeft()!=null){
+					stack1.push(val.getLeft());
+				}
+				if(val.getRight()!=null){
+					stack1.push(val.getRight());
+				}
+			}
+			while(!stack2.isEmpty()){
+				res+=stack2.pop().value+",";
+			}
+			return res;
+		}
+	}
+
+	/**
+	 * Method to do level order traversal
+	 * @param root
+	 * @return
+	 * @throws Exception
+	 */
+	public String levelOrder(TreeNode<Integer> root) throws Exception {
+		String res = "";
+		if(root==null){
+			return res;
+		}
+		Queue<TreeNode<Integer>> queue = new Queue<TreeNode<Integer>>();
+		queue.enQueue(root);
+		while(!queue.isEmpty()){
+			TreeNode<Integer> curr = queue.deQueue();
+			if(curr.getLeft()!=null){
+				queue.enQueue(curr.getLeft());
+			}
+			if(curr.getRight()!=null){
+				queue.enQueue(curr.getRight());
+			}
+			res+=curr.value+",";
+		}
+		return res;
+	}
+	
+	/**
+	 * Method for recursively finding the maximum value in a binary tree
+	 * @param root
+	 * @return
+	 */
+	public int findMaximumInBTree(TreeNode<Integer> root) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 }

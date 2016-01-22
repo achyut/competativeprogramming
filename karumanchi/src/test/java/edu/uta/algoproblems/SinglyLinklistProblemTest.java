@@ -21,6 +21,7 @@ public class SinglyLinklistProblemTest extends TestCase{
 		assertEquals("node1",sls.findNthFromEnd(sl,6));
 		assertEquals("node3",sls.findNthFromEnd(sl,4));
 		assertEquals("node6",sls.findNthFromEnd(sl,1));
+		
 	}
 	
 	public void testFindNthFromEndFast() throws Exception{
