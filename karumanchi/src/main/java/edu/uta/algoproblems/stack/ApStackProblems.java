@@ -285,10 +285,27 @@ public class ApStackProblems {
 		return maxArea;
 	}
 
-	public GenericStack<Integer> sortStackInAscending(GenericStack<Integer> stack) {
-		GenericStack<Integer> stack1 = new GenericStack<Integer>();
-		
-		return null;
+	public GenericStack<Integer> sortStackInAscending(GenericStack<Integer> stack1) {
+		GenericStack<Integer> stack2 = new GenericStack<Integer>();
+		int x,temp;
+		while(!stack1.isEmpty()){
+			temp = stack1.pop();
+			while(!stack2.isEmpty()){
+				x = stack2.pop();
+				if(x<=temp){
+					stack2.push(x);
+					stack2.push(temp);
+					break;
+				}
+				else{
+					stack1.push(x);
+				}
+			}
+			if(stack2.isEmpty()){
+				stack2.push(temp);
+			}
+		}
+		return stack2;
 	}
 
 	
@@ -356,6 +373,35 @@ public class ApStackProblems {
 		else{
 			return val2;
 		}
+	}
+
+	public GenericStack<Integer> removeAdjescentDuplicates(int[] input) {
+		GenericStack<Integer> stack = new GenericStack<Integer>();
+		int i = 0;
+		while(i<input.length){
+			int temp = input[i];
+			if(stack.isEmpty()){
+				stack.push(temp);
+				i++;
+			}
+			else{
+				if(!stack.isEmpty() && temp==stack.peek()){
+					int val = stack.pop();
+					while(temp==val){
+						temp = input[i++];
+					}
+					i--;
+				}
+				else{
+					stack.push(temp);
+					i++;	
+				}
+				
+			}
+			
+		}
+		return stack;
+		
 	}
 	
 	

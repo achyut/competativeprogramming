@@ -117,7 +117,7 @@ public class StackProblemsTest extends TestCase{
 		assertEquals(10,res);
 	}
 	
-	public void sortAStackInAcendingOrder(){
+	public void testSortAStackInAcendingOrder(){
 		ApStackProblems sp = new ApStackProblems();
 		GenericStack<Integer> stack = new GenericStack<Integer>();
 		stack.push(1);
@@ -127,17 +127,19 @@ public class StackProblemsTest extends TestCase{
 		stack.push(7);
 		stack.push(4);
 		stack = sp.sortStackInAscending(stack);
+		//System.out.println(stack);
 		boolean res = ArrayUtils.checkIfTheStackIsSorted(stack);
 		assertTrue(res);
 	}
 	
-	public void removeAdjescentDuplicates(){
+	public void testRemoveAdjescentDuplicates(){
 		// Recursively remove adjescent duplicates
-		// eg. 1,5,6,888,0,1,1,0,6,5 => 1
+		// eg. 1,5,6,8,8,8,0,1,1,0,6,5 => 1
 		// eg. 1,9,6,8,8,8,0,1,1,0,6,5
 		ApStackProblems sp = new ApStackProblems();
 		int[] input = {1,5,6,8,8,8,0,1,1,0,6,5};
-	
+		GenericStack<Integer> stack = sp.removeAdjescentDuplicates(input);
+		System.out.println(stack);
 	}
 	
 	

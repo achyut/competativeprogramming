@@ -1,11 +1,19 @@
 package edu.uta.algoproblems;
 
+import com.sui.datastructures.Utils.BTreePrinter;
+import com.sui.datastructures.nodes.TreeNode;
+
+import edu.uta.algoproblems.trees.ApTreeProblems;
 import junit.framework.TestCase;
 
 public class TreeProblemsTest extends TestCase{
 	
+	
 	public void testPreOrderTraversal(){
-		
+		ApTreeProblems apt = new ApTreeProblems();
+		BTreePrinter<Integer> printer = new BTreePrinter<Integer>();
+		TreeNode<Integer> root = apt.createLargeTree();
+		printer.printTreeNode(root);
 	}
 	
 	public void testIterativePreOrderTraversal(){
@@ -124,12 +132,15 @@ public class TreeProblemsTest extends TestCase{
 	public void testZigZagTraversal(){
 		
 	}
+	
 	public void testFindVerticalSumOfBinaryTree(){
 		
 	}
+	
 	public void testFindPossibleBinaryTreeWithNnodes(){
 		
 	}
+	
 	public void testGenerateAllDifferentBSTwithNnodes(){
 		
 	}
