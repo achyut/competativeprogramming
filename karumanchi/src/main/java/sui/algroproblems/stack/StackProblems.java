@@ -166,4 +166,24 @@ public class StackProblems {
 	
 		return max;
 	}
+
+	public int TrapWater(int[] height) {
+		int water=0;
+		Stack<Integer> st=new Stack<Integer>();
+		for(int i=0;i<height.length;i++){
+			if(st.isEmpty()||height[st.peek()]>=height[i]){
+				st.push(i);
+			}
+			else{
+				int temp=st.pop();			
+				if(!st.isEmpty()){
+					int min=(Math.min(height[st.peek()], height[i]));
+					water+=(min-height[temp])*(i-st.peek()-1);
+				}
+				i--;
+			}
+		}
+		
+		return water;
+	}
 }
