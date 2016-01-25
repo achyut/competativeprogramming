@@ -1,5 +1,7 @@
 package edu.uta.algoproblems.trees;
 
+import java.util.Random;
+
 import com.sui.datastructures.GenericStack;
 import com.sui.datastructures.Queue;
 import com.sui.datastructures.Stack;
@@ -27,6 +29,33 @@ public class ApTreeProblems{
 		
 		TreeNode<Integer> node6 = new TreeNode<Integer>(6);
 		TreeNode<Integer> node7 = new TreeNode<Integer>(7);
+		node3.setLeft(node6);
+		node3.setRight(node7);
+		
+		return root;
+	}
+	
+	/**
+	 * Method to create a random tree having 7 Nodes
+	 * @return
+	 */
+	public TreeNode<Integer> createRandomTree(){
+		Random rand = new Random();
+		TreeNode<Integer> root = new TreeNode<Integer>(rand.nextInt(100));
+		
+		TreeNode<Integer> node2 = new TreeNode<Integer>(rand.nextInt(100));
+		TreeNode<Integer> node3 = new TreeNode<Integer>(rand.nextInt(100));
+		
+		root.setLeft(node2);
+		root.setRight(node3);
+		
+		TreeNode<Integer> node4 = new TreeNode<Integer>(rand.nextInt(100));
+		TreeNode<Integer> node5 = new TreeNode<Integer>(rand.nextInt(100));
+		node2.setLeft(node4);
+		node2.setRight(node5);
+		
+		TreeNode<Integer> node6 = new TreeNode<Integer>(rand.nextInt(100));
+		TreeNode<Integer> node7 = new TreeNode<Integer>(rand.nextInt(100));
 		node3.setLeft(node6);
 		node3.setRight(node7);
 		
@@ -335,8 +364,108 @@ public class ApTreeProblems{
 	 * @return
 	 */
 	public int findMaximumInBTree(TreeNode<Integer> root) {
-		// TODO Auto-generated method stub
-		return 0;
+		if(root.getLeft()==null && root.getRight()==null){
+			return root.value;
+		}
+		else{
+			int max = root.value;
+			int max1 = findMaximumInBTree(root.getLeft());
+			int max2 = findMaximumInBTree(root.getRight());
+			if(max1>max2){
+				if(max1>max){
+					max = max1;
+				}
+			}
+			if(max2>max1){
+				if(max2>max){
+					max = max2;
+				}
+			}
+			return max;
+		}
+	}
+
+	/**
+	 * Method to find maximum value in a b tree using iterative approach.
+	 * @param root
+	 * @return
+	 * @throws Exception 
+	 */
+	public int findMaximumInBTreeIterative(TreeNode<Integer> root) throws Exception {
+		if(root==null){
+			throw new Exception("Empty tree found!");
+		}
+		GenericStack<TreeNode<Integer>> stack = new GenericStack<TreeNode<Integer>>();
+		int max = root.value;
+		stack.push(root);
+		while(!stack.isEmpty()){
+			TreeNode<Integer> val = stack.pop();
+			if(val.getRight()!=null){
+				stack.push(val.getRight());
+			}
+			if(val.getLeft()!=null){
+				stack.push(val.getLeft());
+			}
+			if(val.value>max){
+				max = val.value;
+			}
+		}
+		return max;
+	}
+
+	/**
+	 * Method to search an element in a binary without using recursion
+	 * @param root
+	 * @param testvalue
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean searchElementWithoutRecursionInBTree(TreeNode<Integer> root, int testvalue) throws Exception{
+		if(root==null){
+			throw new Exception("Empty tree!");
+		}
+		GenericStack<TreeNode<Integer>> stack = new GenericStack<TreeNode<Integer>>();
+		stack.push(root);
+		while(!stack.isEmpty()){
+			TreeNode<Integer> curr = stack.pop();
+			if(curr.value==testvalue){
+				return true;
+			}
+			if(curr.getRight()!=null){
+				stack.push(curr.getRight());
+			}
+			if(curr.getLeft()!=null){
+				stack.push(curr.getLeft());
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Method to search an element in a binary tree using recursion
+	 * @param root
+	 * @param testvalue
+	 * @return
+	 * @throws Exception 
+	 */
+	public boolean searchElementUsingRecursion(TreeNode<Integer> root, int testvalue) throws Exception {
+		if(root==null){
+			return false;
+		}
+		else{
+			if(root.value==testvalue){
+				return true;
+			}
+			boolean val = searchElementUsingRecursion(root.getLeft(),testvalue);
+			if(val==true){
+				return true;
+			}
+			val = searchElementUsingRecursion(root.getRight(),testvalue);
+			if(val==true){
+				return true;
+			}
+			return false;
+		}
 	}
 	
 	

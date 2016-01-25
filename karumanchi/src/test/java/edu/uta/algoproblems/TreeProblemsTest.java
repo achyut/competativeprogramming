@@ -63,7 +63,6 @@ public class TreeProblemsTest extends TestCase{
 		ApTreeProblems apt = new ApTreeProblems();
 		TreeNode<Integer> root = apt.createCompleteTree();
 		String levelorder = apt.levelOrder(root);
-		System.out.println(levelorder);
 		assertEquals("1,2,3,4,5,6,7,",levelorder);
 	}
 	
@@ -71,22 +70,53 @@ public class TreeProblemsTest extends TestCase{
 		ApTreeProblems apt = new ApTreeProblems();
 		TreeNode<Integer> root = apt.createCompleteTree();
 		int max  = apt.findMaximumInBTree(root);
-		System.out.println(max);
 		assertEquals(7,max);
 	}
 	
-	public void testFindMaximumElementInBinaryTreeWithoutRecursion(){
+	public void testFindMaximumElementInBinaryTreeWithoutRecursion() throws Exception{
+		ApTreeProblems apt = new ApTreeProblems();
+		TreeNode<Integer> root = apt.createCompleteTree();
+		int max  = apt.findMaximumInBTreeIterative(root);
+		assertEquals(7,max);
+	}
+	
+	public void testSearchElementInBinaryTree() throws Exception{
+		ApTreeProblems apt = new ApTreeProblems();
+		TreeNode<Integer> root = apt.createCompleteTree();
+		BTreePrinter<Integer> printer = new BTreePrinter<Integer>();
+		printer.printTreeNode(root);
+ 		boolean result  = apt.searchElementUsingRecursion(root,2);
+		assertTrue(result);
+		result  = apt.searchElementUsingRecursion(root,10);
+		assertFalse(result);
+		root = null;
+		try{
+			result  = apt.searchElementUsingRecursion(root,14);	
+		}
+		catch(Exception e){}
+	}
+	
+	public void testSearchElementWithoutRecursion() throws Exception{
+		ApTreeProblems apt = new ApTreeProblems();
+		TreeNode<Integer> root = apt.createCompleteTree();
+		boolean result  = apt.searchElementWithoutRecursionInBTree(root,2);
+		assertTrue(result);
+		result  = apt.searchElementWithoutRecursionInBTree(root,10);
+		assertFalse(result);
+		
+		root = null;
+		
+		try{
+			result  = apt.searchElementWithoutRecursionInBTree(root,14);	
+		}
+		catch(Exception e){}
 		
 	}
-	public void testSearchElementInBinaryTree(){
-		
-	}
-	public void testSearchElementWithoutRecursion(){
-		
-	}
+	
 	public void testInsertElementInBinaryTree(){
 		
 	}
+	
 	public void testInsertElementInBinarytreeWithoutRecursion(){
 		
 	}
