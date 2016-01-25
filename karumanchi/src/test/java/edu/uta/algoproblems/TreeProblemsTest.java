@@ -83,9 +83,7 @@ public class TreeProblemsTest extends TestCase{
 	public void testSearchElementInBinaryTree() throws Exception{
 		ApTreeProblems apt = new ApTreeProblems();
 		TreeNode<Integer> root = apt.createCompleteTree();
-		BTreePrinter<Integer> printer = new BTreePrinter<Integer>();
-		printer.printTreeNode(root);
- 		boolean result  = apt.searchElementUsingRecursion(root,2);
+		boolean result  = apt.searchElementUsingRecursion(root,2);
 		assertTrue(result);
 		result  = apt.searchElementUsingRecursion(root,10);
 		assertFalse(result);
@@ -110,28 +108,48 @@ public class TreeProblemsTest extends TestCase{
 			result  = apt.searchElementWithoutRecursionInBTree(root,14);	
 		}
 		catch(Exception e){}
-		
 	}
 	
 	public void testInsertElementInBinaryTree(){
-		
+		ApTreeProblems apt = new ApTreeProblems();
+		TreeNode<Integer> root = apt.createCompleteTree();
+		TreeNode<Integer> newnode = new TreeNode<Integer>(10);
+		apt.insertIntoTree(root,newnode);
+		int size = apt.findSizeOfBinaryTree(root);
+		assertEquals(8,size);
 	}
 	
 	public void testInsertElementInBinarytreeWithoutRecursion(){
-		
+		ApTreeProblems apt = new ApTreeProblems();
+		TreeNode<Integer> root = apt.createCompleteTree();
+		TreeNode<Integer> newnode = new TreeNode<Integer>(10);
+		apt.insertIntoTreeWithoutRecursion(root,newnode);
+		int size = apt.findSizeOfBinaryTree(root);
+		assertEquals(8,size);
 	}
+	
 	public void testFindSizeOfBinaryTree(){
-		
+		ApTreeProblems apt = new ApTreeProblems();
+		TreeNode<Integer> root = apt.createCompleteTree();
+		int max  = apt.findSizeOfBinaryTree(root);
+		assertEquals(7,max);
 	}
+	
 	public void testFindSizeOfBinaryTreeWithoutRecursion(){
-		
+		ApTreeProblems apt = new ApTreeProblems();
+		TreeNode<Integer> root = apt.createCompleteTree();
+		int max  = apt.findSizeOfBinaryTreeIterative(root);
+		assertEquals(7,max);
 	}
+	
 	public void testDeleteATree(){
 		
 	}
+	
 	public void testPrintLevelOrderInReverse(){
 		
 	}
+	
 	public void testFindDepthOfTheBinaryTree(){
 		
 	}

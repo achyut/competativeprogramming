@@ -467,6 +467,67 @@ public class ApTreeProblems{
 			return false;
 		}
 	}
+
+	/**
+	 * Method to find the number of nodes in a binary tree using recursion
+	 * @param root
+	 * @return
+	 */
+	public int findSizeOfBinaryTree(TreeNode<Integer> root) {
+		if(root==null){
+			return 0;
+		}
+		else{
+			int val = findSizeOfBinaryTree(root.getLeft());
+			int val1 = findSizeOfBinaryTree(root.getRight());
+			int total = val + val1 + 1;
+			return total;
+		}
+	}
+
+	/**
+	 * find the number of nodes in a tree using stacks
+	 * @param root
+	 * @return
+	 */
+	public int findSizeOfBinaryTreeIterative(TreeNode<Integer> root) {
+		if(root==null){
+			return 0;
+		}
+		GenericStack<TreeNode<Integer>> stack = new GenericStack<TreeNode<Integer>>();
+		stack.push(root);
+		int count = 0;
+		while(!stack.isEmpty()){
+			count++;
+			TreeNode<Integer> val = stack.pop();
+			if(val.getLeft()!=null){
+				stack.push(val.getLeft());
+			}
+			if(val.getRight()!=null){
+				stack.push(val.getRight());
+			}
+		}
+		return count;
+	}
+
+	public void insertIntoTree(TreeNode<Integer> root, TreeNode<Integer> newnode) {
+		if(root.getLeft()==null){
+			root.setLeft(newnode);
+			return;
+		}
+		insertIntoTree(root.getLeft(), newnode);
+	}
+
+	public void insertIntoTreeWithoutRecursion(TreeNode<Integer> root, TreeNode<Integer> newnode) {
+		if(root==null){
+			root = newnode;
+		}
+		TreeNode<Integer> curr = root;
+		while(curr.getLeft()!=null){
+			curr = curr.getLeft();
+		}
+		curr.setLeft(newnode);
+	}
 	
 	
 }
