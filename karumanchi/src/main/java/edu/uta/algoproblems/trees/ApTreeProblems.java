@@ -1119,23 +1119,23 @@ public class ApTreeProblems{
 			}
 			else{
 					
-					boolean result = checkIfTreesAreMirror(root.getLeft(), root1.getRight());
-					if(result == false){
-						return false;
-					}
-					if(root.value == root1.value){
-						return true;
-					}
-					result = checkIfTreesAreMirror(root.getRight(), root1.getLeft());
-					if(result == false){
-						return false;
-					}
-					if(root.value == root1.value){
-						return true;
-					}
+				boolean result = checkIfTreesAreMirror(root.getLeft(), root1.getRight());
+				if(result == false){
 					return false;
-				}	
-			}
+				}
+				if(root.value == root1.value){
+					return true;
+				}
+				result = checkIfTreesAreMirror(root.getRight(), root1.getLeft());
+				if(result == false){
+					return false;
+				}
+				if(root.value == root1.value){
+					return true;
+				}
+				return false;
+			}	
 		}
-	
+	}
+
 }

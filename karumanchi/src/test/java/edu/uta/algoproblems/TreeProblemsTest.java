@@ -329,6 +329,8 @@ public class TreeProblemsTest extends TestCase{
 		assertFalse(result);
 	}
 	
+	
+	
 	public void testCreateBinaryTreeFromItsInorderAndPreorderTraversal(){
 		
 	}
@@ -379,5 +381,12 @@ public class TreeProblemsTest extends TestCase{
 
 	}
 	
+	public void testFindSum(){
+		
+		int sum = findSum();
+	}
 	
+	private int findSum(){
+		return 0;
+	}
 }
